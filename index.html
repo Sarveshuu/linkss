@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartoon Link Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #ff9f00;
+            --dark-orange: #e68a00;
+            --light-orange-bg: #ffc34d;
+            --white: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Luckiest Guy', cursive;
+            background-color: var(--light-orange-bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto; /* Sirf vertical scrolling allow karein */
+            overflow-x: hidden; /* Horizontal scrolling ko hamesha band rakhein */
+            padding: 20px;
+        }
+
+        /* Animated background bubbles ke liye container */
+        #background-bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            animation: rise 10s infinite;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1080px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Main content container */
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Title Animation */
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--white);
+            text-shadow: 5px 5px 0px var(--dark-orange);
+            margin-bottom: 40px;
+            animation: pop-in 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+
+        @keyframes pop-in {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Links ka container */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Links ki styling aur animation */
+        .link {
+            display: inline-block;
+            background-color: var(--orange);
+            color: var(--white);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 0px var(--shadow-color);
+            box-shadow: 0 6px 0 var(--dark-orange);
+            transition: all 0.15s ease-out;
+            opacity: 0;
+            transform: translateY(30px);
+            /* Staggered animation ke liye */
+            animation: slide-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        /* Hover effect */
+        .link:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 0 var(--dark-orange);
+        }
+
+        .link:active {
+            transform: translateY(2px) scale(1);
+            box-shadow: 0 3px 0 var(--dark-orange);
+        }
+        
+        /* Staggered animation delays */
+        .link:nth-child(1) { animation-delay: 0.2s; }
+        .link:nth-child(2) { animation-delay: 0.4s; }
+        .link:nth-child(3) { animation-delay: 0.6s; }
+        .link:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes slide-up {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="background-bubbles"></div>
+
+    <div class="container">
+        <h1>Sign Official Links!</h1>
+        <div class="links-container">
+           
+            <a href="https://x.com/ethsign/status/1870235300779155758" class="link">SignPass Article</a>
+            <a href="https://x.com/realyanxin/status/1957448740794441901" class="link">Orange Dynasty Article</a>
+            <a href="https://x.com/realyanxin/status/1946078143338762628" class="link">$SIGN = $1</a>
+            <a href="https://x.com/ClaireMa12/status/1876986406998089933" class="link">Blockchain Trust</a>
+            <a href="https://x.com/tokentable/status/1922663996110553488" class="link">Build Behind Builder(Part 1)</a>
+            <a href="https://x.com/tokentable/status/1930890333694443790" class="link">Build Behind Builder(Part 2)</a>
+            <a href="https://sign.global/" class="link">Sign Official</a>
+            <a href="https://t.co/Q38YrGy3A1" class="link">TokenTable Official</a>
+            <a href="https://t.co/ILYgsuhnzo" class="link">SignPass Official</a>
+            <a href="https://orange.sign.global/app?invite-code=0E2WQANL93" class="link">Orange Dynasty Official</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bubblesContainer = document.getElementById('background-bubbles');
+            const numberOfBubbles = 20;
+
+            for (let i = 0; i < numberOfBubbles; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+
+                const size = Math.random() * 60 + 20; // 20px se 80px tak
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+
+                bubble.style.left = `${Math.random() * 100}%`;
+                
+                const animationDuration = Math.random() * 10 + 8; // 8 se 18 seconds
+                const animationDelay = Math.random() * 5; // 0 se 5 seconds
+                
+                bubble.style.animationDuration = `${animationDuration}s`;
+                bubble.style.animationDelay = `${animationDelay}s`;
+
+                bubblesContainer.appendChild(bubble);
+            }
+        });
+    </script>
+
+</body>
+</html>
